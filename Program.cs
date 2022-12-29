@@ -1,3 +1,5 @@
+using webapi.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -13,6 +15,8 @@ builder.Services.AddSwaggerGen();
 // builder.Services.AddSingleton
 // builder.Services.AddScoped<IHelloWorldService, HellowWorldService>();
 builder.Services.AddScoped<IHelloWorldService>(p => new HellowWorldService());
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
 using webapi.Services;
+using webapi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,11 +10,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Custom dependencies to inject
+// --- Custom dependencies to inject --
 // Service = Dependency
 
 // builder.Services.AddSingleton
 // builder.Services.AddScoped<IHelloWorldService, HellowWorldService>();
+builder.Services.AddSqlServer<TasksContext>("Server=MYPC;Database=tasksdb;Trusted_Connection=True;");
 builder.Services.AddScoped<IHelloWorldService>(p => new HellowWorldService());
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
@@ -31,7 +33,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-// Insert custom middlewares here
+// -- Insert custom middlewares here --
 // app.UseWelcomePage();
 // app.UseTimeMiddleware();
 
